@@ -1,0 +1,81 @@
+---
+// Standalone hand-authored landing (D-01/D-04) — NOT a Starlight layout.
+// Read the base once; every internal href/asset is built from it so it stays
+// correct under the GitHub Pages base path (RESEARCH Pattern 1 / Pitfall 2).
+const base = import.meta.env.BASE_URL;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+		<title>subfolio-astro-docs</title>
+		<style>
+			:root {
+				color-scheme: light dark;
+				--bg: #ffffff;
+				--fg: #17181c;
+				--link: #2563eb;
+			}
+			@media (prefers-color-scheme: dark) {
+				:root {
+					/* matches Starlight's own dark surface + a legible dark-mode link */
+					--bg: #17181c;
+					--fg: #ffffff;
+					--link: #7aa2f7;
+				}
+			}
+			* {
+				box-sizing: border-box;
+			}
+			html,
+			body {
+				margin: 0;
+			}
+			body {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: flex-start;
+				gap: 16px;
+				padding: 48px 24px;
+				background: var(--bg);
+				color: var(--fg);
+				font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+				font-size: 16px;
+				line-height: 1.5;
+			}
+			@media (min-width: 640px) {
+				body {
+					padding: 48px 32px;
+				}
+			}
+			h1 {
+				margin: 0;
+				font-size: 28px;
+				font-weight: 600;
+				line-height: 1.2;
+			}
+			p {
+				margin: 0;
+			}
+			a.cta {
+				/* padding lifts the visible ~14px link to a 44px min tap target (UI-SPEC Spacing) */
+				display: inline-flex;
+				align-items: center;
+				min-height: 44px;
+				padding: 8px 16px;
+				color: var(--link);
+				text-decoration: underline;
+				text-underline-offset: 8px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>subfolio-astro-docs</h1>
+		<p>Documentation site — under construction.</p>
+		<a class="cta" href={`${base}docs/`}>View the Docs</a>
+	</body>
+</html>

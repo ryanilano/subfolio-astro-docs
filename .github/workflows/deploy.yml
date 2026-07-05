@@ -1,0 +1,37 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# Minimal scopes: this workflow never commits back, so contents stays read-only
+# (SITE-02 security requirement). pages:write + id-token:write are required by
+# the native Actions Pages deploy (OIDC).
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout your repository using git
+        uses: actions/checkout@v6
+      - name: Install, build, and upload your site
+        # Official composite action: installs deps, runs the build, and uploads
+        # the Pages artifact WITH include-hidden-files:true — the exact flag that
+        # keeps dist/.nojekyll alive (RESEARCH Pitfall 3). Do not hand-roll upload.
+        uses: withastro/action@v6
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
