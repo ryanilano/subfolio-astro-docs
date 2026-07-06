@@ -1,0 +1,20 @@
+---
+title: Conventions Reference
+description: How Subfolio reads plain file and folder names as structure — the full naming-convention reference.
+---
+
+Subfolio has no CMS and no database. Every behavior — embedded text, popups, feature
+cards, slideshows, access rules, thumbnails — is triggered entirely by how you **name**
+your files and folders. This reference covers every convention, each with the real
+source files, what they contain, and what the loader does with them.
+
+- **[Position Embeds](/subfolio-astro-docs/docs/conventions/embeds/)** — `-t-`/`-m-`/`-b-` inline text, images, and RSS feeds
+- **[Enhancers](/subfolio-astro-docs/docs/conventions/enhancers/)** — `.link` / `.pop` / `.cut` / `.ftr`
+- **[Folder Suffixes](/subfolio-astro-docs/docs/conventions/folder-suffixes/)** — `.site` / `.slide` / `.oplx`
+- **[Hidden Items](/subfolio-astro-docs/docs/conventions/hidden-items/)** — `-hidden` and dot-prefixed files
+- **[`-access`](/subfolio-astro-docs/docs/conventions/access/)** — access rules (parsed, not enforced)
+- **[Thumbnails](/subfolio-astro-docs/docs/conventions/thumbnails/)** — `-thumbnails` and custom overrides
+
+Every example on these pages is lifted verbatim from the engine's own
+[`content/examples/`](https://github.com/ryanilano/subfolio-astro/tree/main/content/examples)
+fixture, with a link to see the real thing rendered live.

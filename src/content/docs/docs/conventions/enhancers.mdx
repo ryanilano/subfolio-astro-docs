@@ -1,0 +1,114 @@
+---
+title: Enhancers
+description: The .link / .pop / .cut / .ftr file-extension enhancers.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+An **enhancer** is a file extension that triggers behavior beyond simple file
+serving. Each enhancer file's body is YAML — plain text, no build step. All four
+covered here are hidden from normal listings by default (per
+[Hidden Items](/subfolio-astro-docs/docs/conventions/hidden-items/), `.ftr` and
+`.cut` are hidden by extension; `.link` and `.pop` are ordinary visible files).
+[Source: `docs/spec/SPEC-conventions.md` §3]
+
+## `.link` — external hyperlink
+
+<FileTree>
+- content/examples/
+  - 02_popups_links_shortcuts/
+    - area17.com.link
+</FileTree>
+
+`area17.com.link`:
+
+```yaml
+target: _blank
+url: http://www.area17.com
+comment: Example link to an external website.
+```
+
+**Result:** renders as a hyperlink to `url`, opening in the tab/window specified by
+`target`, with `comment` shown as the listing description.
+
+[See it live →](https://subfolio-astro.ilano.fyi/02_popups_links_shortcuts/)
+
+## `.pop` — popup window
+
+<FileTree>
+- content/examples/
+  - 02_popups_links_shortcuts/
+    - giant_step_jukebox.pop
+</FileTree>
+
+`giant_step_jukebox.pop`:
+
+```yaml
+url: http://jukebox.giantstep.net/player
+width: 494
+height: 560
+style: WINDOW
+comment: Example link within a pop-up window.
+```
+
+**Result:** renders a link that opens `url` in a new browser window sized
+`width` × `height`, using the given window chrome `style`.
+[Source: `docs/spec/SPEC-conventions.md` §3.5]
+
+[See it live →](https://subfolio-astro.ilano.fyi/02_popups_links_shortcuts/)
+
+## `.cut` — shortcut
+
+<FileTree>
+- content/examples/
+  - hiding_content.cut
+  - 02_popups_links_shortcuts/
+    - internal-shortcut.cut
+</FileTree>
+
+`internal-shortcut.cut`:
+
+```yaml
+name: internal shortcut
+directory: -hidden
+```
+
+**Result:** builds a "related" listing entry named `name`, pointing at the local
+`directory` (or an external `url`, if set instead). This is how a folder can
+surface a link to a sibling `-hidden/` folder that wouldn't otherwise appear in
+the listing. [Source: `docs/spec/SPEC-conventions.md` §3.1]
+
+[See it live →](https://subfolio-astro.ilano.fyi/02_popups_links_shortcuts/)
+
+## `.ftr` — feature card
+
+<FileTree>
+- content/examples/
+  - 03_featuring_content/
+    - featured_file.ftr
+    - featured-file.txt
+    - featured_folder.ftr
+    - featured_folder/
+    - featured-link.ftr
+    - -thumbnails-custom/
+</FileTree>
+
+`featured_folder.ftr`:
+
+```yaml
+title: Featured Folder
+folder: featured_folder
+image: -thumbnails-custom/folder_thumbnail.png
+width: 250
+height: 230
+description:>
+ You can feature a folder in the same folder. By doing so, the folder will not appear in the listing below.
+```
+
+**Result:** renders a feature card with `title`, a thumbnail from `image`, sized
+`width` × `height`, and `description` as body text. The card links to whatever the
+`.ftr` file references — `folder`, `file`, or `link` — and that referenced
+item is excluded from the normal file listing below the feature card, since it's
+now presented as the feature itself. [Source: `docs/spec/SPEC-conventions.md` §3.2]
+
+[See it live →](https://subfolio-astro.ilano.fyi/03_featuring_content/)

@@ -1,0 +1,88 @@
+/*
+ * Thin, upgrade-safe remap: tokens.css -> Starlight's documented --sl-* custom
+ * properties ONLY (D-07). No internal-selector overrides, no component overrides.
+ *
+ * Cascade note (GROUNDWORK-R4 fact 6 / RESEARCH.md Pattern 3): Starlight's base
+ * --sl-* values live inside `@layer starlight.base`. A plain UNLAYERED :root { }
+ * always wins over a layered rule per the CSS Cascade Layers spec — this is
+ * documented, stable Starlight behavior, not an implementation detail, so no
+ * `!important` or internal selectors are needed here.
+ *
+ * Structure mirrors Starlight's own (props.css): base :root = DARK (Starlight's
+ * default mode), :root[data-theme='light'] = the LIGHT override.
+ *
+ * Accent family (RESEARCH.md Pitfall 1 — the highest-risk gap this plan closes):
+ * --sl-color-text-accent alone is NOT enough. Starlight independently consumes
+ * --sl-color-accent{,-low,-high} (search-modal border/outline, mobile-TOC
+ * active-heading border, native form-control accent-color in reset.css) and
+ * --sl-color-text-invert (the background/foreground partner of
+ * --sl-color-text-accent in SkipLink.astro and SidebarSublist.astro's
+ * [aria-current='page'] highlight). All must be set explicitly here or
+ * Starlight's default blue (hue 234) survives in one of those spots.
+ *
+ * D-01 (Phase 3): --sl-color-text-accent/--sl-color-accent now ride the fresh
+ * --color-accent token (tokens.css) instead of --color-ink. -low/-high are
+ * background-tint/emphasis variants of that same accent (not text roles, so
+ * not AA-gated) — literal hex since CSS custom properties have no native
+ * tint/shade function here; low = ~10% accent over the mode's own bg (subtle
+ * wash), high = ~30% mixed toward the opposite pole (stronger emphasis/border).
+ *
+ * Left untouched (RESEARCH.md Pitfall 2): --sl-color-blue/-purple/-orange/-red
+ * and --sl-color-asides-* — Starlight's own note/tip/caution/danger semantic
+ * language, not brand identity. --sl-line-height also left at Starlight's
+ * default 1.75 (RESEARCH.md Pitfall 4) — a vet-discretion item, not required
+ * for SITE-03.
+ */
+
+:root {
+  /* dark (Starlight's default mode) */
+  --sl-font: var(--font-sans);
+  --sl-font-mono: var(--font-sans);
+
+  --sl-color-text: var(--color-ink);
+  --sl-color-bg: var(--color-bg);
+
+  /* D-01: fresh accent, not ink — kills Starlight's default blue AND retires
+   * the R1-era ink-as-link choice in favor of --color-accent (dark value,
+   * 6.97:1 vs --color-bg #17181c). */
+  --sl-color-text-accent: var(--color-accent);
+
+  /* Full accent family (Pitfall 1) — derived from --color-accent, NOT
+   * auto-derived from --sl-color-text-accent; each must be set explicitly.
+   * -low/-high are tinted variants of the dark-mode accent (#5aa9e6). */
+  --sl-color-accent: var(--color-accent);
+  --sl-color-accent-low: #2b4459; /* ~30% accent mixed into --color-bg (subtle wash) */
+  --sl-color-accent-high: #8cc3ee; /* ~30% white mixed in (stronger emphasis/border) */
+
+  /* Background-role partner of --sl-color-text-accent / --sl-color-accent when
+   * used as a fill (skip-link focus bg, sidebar current-page indicator).
+   * Resolves to the CURRENT mode's own bg (near-black in this dark section)
+   * so it contrasts correctly against the ink used above it as a background. */
+  --sl-color-text-invert: var(--color-bg);
+
+  --sl-color-hairline: var(--color-border);
+  --sl-color-hairline-light: var(--color-border-light);
+  --sl-color-hairline-shade: var(--color-border);
+}
+
+:root[data-theme='light'] {
+  --sl-font: var(--font-sans);
+  --sl-font-mono: var(--font-sans);
+
+  --sl-color-text: var(--color-ink);
+  --sl-color-bg: var(--color-bg);
+
+  /* D-01: fresh accent (light value, 6.29:1 vs --color-bg #ffffff). */
+  --sl-color-text-accent: var(--color-accent);
+
+  /* -low/-high are tinted variants of the light-mode accent (#1a5fb4). */
+  --sl-color-accent: var(--color-accent);
+  --sl-color-accent-low: #e6eefb; /* ~10% accent mixed into --color-bg (subtle wash) */
+  --sl-color-accent-high: #12427e; /* ~30% black mixed in (stronger emphasis/border) */
+
+  --sl-color-text-invert: var(--color-bg);
+
+  --sl-color-hairline: var(--color-border);
+  --sl-color-hairline-light: var(--color-border-light);
+  --sl-color-hairline-shade: var(--color-border);
+}

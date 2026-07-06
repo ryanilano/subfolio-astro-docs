@@ -12,6 +12,22 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'subfolio-astro-docs',
+      customCss: ['./src/styles/tokens.css', './src/styles/starlight-theme.css'],
+      sidebar: [
+        { label: 'Getting Started', slug: 'docs/getting-started' },
+        {
+          label: 'Conventions',
+          items: [
+            { label: 'Position Embeds', slug: 'docs/conventions/embeds' },
+            { label: 'Enhancers', slug: 'docs/conventions/enhancers' },
+            { label: 'Folder Suffixes', slug: 'docs/conventions/folder-suffixes' },
+            { label: 'Hidden Items', slug: 'docs/conventions/hidden-items' },
+            { label: '-access', slug: 'docs/conventions/access' },
+            { label: 'Thumbnails', slug: 'docs/conventions/thumbnails' },
+          ],
+        },
+        { label: 'Changes & Improvements', slug: 'docs/changes' },
+      ],
     }),
   ],
 });
