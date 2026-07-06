@@ -12,6 +12,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'subfolio-astro-docs',
+      customCss: ['./src/styles/tokens.css', './src/styles/starlight-theme.css'],
     }),
   ],
 });

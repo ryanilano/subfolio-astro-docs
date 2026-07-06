@@ -1,0 +1,76 @@
+/*
+ * Thin, upgrade-safe remap: tokens.css -> Starlight's documented --sl-* custom
+ * properties ONLY (D-07). No internal-selector overrides, no component overrides.
+ *
+ * Cascade note (GROUNDWORK-R4 fact 6 / RESEARCH.md Pattern 3): Starlight's base
+ * --sl-* values live inside `@layer starlight.base`. A plain UNLAYERED :root { }
+ * always wins over a layered rule per the CSS Cascade Layers spec — this is
+ * documented, stable Starlight behavior, not an implementation detail, so no
+ * `!important` or internal selectors are needed here.
+ *
+ * Structure mirrors Starlight's own (props.css): base :root = DARK (Starlight's
+ * default mode), :root[data-theme='light'] = the LIGHT override.
+ *
+ * Accent family (RESEARCH.md Pitfall 1 — the highest-risk gap this plan closes):
+ * --sl-color-text-accent alone is NOT enough. Starlight independently consumes
+ * --sl-color-accent{,-low,-high} (search-modal border/outline, mobile-TOC
+ * active-heading border, native form-control accent-color in reset.css) and
+ * --sl-color-text-invert (the background/foreground partner of
+ * --sl-color-text-accent in SkipLink.astro and SidebarSublist.astro's
+ * [aria-current='page'] highlight). All must be set explicitly here or
+ * Starlight's default blue (hue 234) survives in one of those spots.
+ *
+ * Left untouched (RESEARCH.md Pitfall 2): --sl-color-blue/-purple/-orange/-red
+ * and --sl-color-asides-* — Starlight's own note/tip/caution/danger semantic
+ * language, not brand identity. --sl-line-height also left at Starlight's
+ * default 1.75 (RESEARCH.md Pitfall 4) — a vet-discretion item, not required
+ * for SITE-03.
+ */
+
+:root {
+  /* dark (Starlight's default mode) */
+  --sl-font: var(--font-sans);
+  --sl-font-mono: var(--font-sans);
+
+  --sl-color-text: var(--color-ink);
+  --sl-color-bg: var(--color-bg);
+
+  /* R1/D-04: link == ink, kills Starlight's default blue in body/link text */
+  --sl-color-text-accent: var(--color-ink);
+
+  /* Full accent family (Pitfall 1) — derived from the same ink/neutral family,
+   * NOT auto-derived from --sl-color-text-accent; each must be set explicitly. */
+  --sl-color-accent: var(--color-ink);
+  --sl-color-accent-low: var(--color-hover);
+  --sl-color-accent-high: var(--color-border);
+
+  /* Background-role partner of --sl-color-text-accent / --sl-color-accent when
+   * used as a fill (skip-link focus bg, sidebar current-page indicator).
+   * Resolves to the CURRENT mode's own bg (near-black in this dark section)
+   * so it contrasts correctly against the ink used above it as a background. */
+  --sl-color-text-invert: var(--color-bg);
+
+  --sl-color-hairline: var(--color-border);
+  --sl-color-hairline-light: var(--color-border-light);
+  --sl-color-hairline-shade: var(--color-border);
+}
+
+:root[data-theme='light'] {
+  --sl-font: var(--font-sans);
+  --sl-font-mono: var(--font-sans);
+
+  --sl-color-text: var(--color-ink);
+  --sl-color-bg: var(--color-bg);
+
+  --sl-color-text-accent: var(--color-ink);
+
+  --sl-color-accent: var(--color-ink);
+  --sl-color-accent-low: var(--color-hover);
+  --sl-color-accent-high: var(--color-border);
+
+  --sl-color-text-invert: var(--color-bg);
+
+  --sl-color-hairline: var(--color-border);
+  --sl-color-hairline-light: var(--color-border-light);
+  --sl-color-hairline-shade: var(--color-border);
+}

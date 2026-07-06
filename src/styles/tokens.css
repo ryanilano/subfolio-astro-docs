@@ -75,8 +75,14 @@
  * the shared header; RESEARCH.md Pitfall 3 documents this as an accepted,
  * scoped limitation, not a bug). Straight neutral inversion (D-06) — no
  * accent-specific dark tuning needed since the fresh accent is deferred. */
+/* Scoped to :not([data-theme]) — Starlight always sets a concrete `data-theme`
+ * attribute (light or dark, never absent) before first paint, so this media
+ * query only ever matches the landing (no attribute, OS-driven). Without this
+ * scoping, an equal-specificity, later-in-source media block would win over an
+ * explicit `[data-theme='light']` selection on a docs page whenever the OS is
+ * set to dark — silently defeating the user's explicit theme choice. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme]) {
     --color-ink: #f2f2f2;
     --color-ink-2: #a3a3a3;
     --color-ink-3: #8a8a8a;
