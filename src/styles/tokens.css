@@ -1,0 +1,103 @@
+/*
+ * Design tokens — defined ONCE, consumed by both surfaces (SITE-03, SC#1):
+ *   - the standalone landing (src/pages/index.astro, `import '../styles/tokens.css'`)
+ *   - Starlight docs (via astro.config.mjs `customCss`, remapped in starlight-theme.css)
+ *
+ * Architecture (locked, CONTEXT.md D-01/D-03):
+ *   - rem-first: all scalable font-size/width/height values are rem, off a 16px root,
+ *     so browser/device zoom scales the whole system. No hardcoded px for scalable dims.
+ *   - single swappable --font-sans (D-03) so a later font swap touches one line.
+ *   - swappable --color-* tokens (D-04/D-05) — monochrome/neutral baseline now; the
+ *     eventual "fresh" accent is a later drop-in, not decided here.
+ *
+ * Values ported verbatim from the engine's shipping theme:
+ *   subfolio-astro/config/themes/default/css/_colors.scss
+ *   subfolio-astro/config/themes/default/css/_typography.scss
+ * Dark values are DERIVED (D-06) — Subfolio's source palette is light-only; exact
+ * dark hexes are a design-vet call at build time (CONTEXT "Claude's Discretion").
+ */
+
+/* Self-hosted Inter (D-03) — copied verbatim from the engine's public/fonts/.
+ * Relative url() is resolved + fingerprinted by Vite's normal CSS asset pipeline,
+ * so it stays correct under `base: '/subfolio-astro-docs/'` with no manual
+ * `${base}` string-building (RESEARCH.md Pattern 1). No CDN. */
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Variable-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+
+  /* --- Font family (D-03: single swappable custom property) --- */
+  --font-sans: 'Inter', Arial, 'Helvetica Neue', Helvetica, Geneva, sans-serif;
+  --font-serif: Georgia, 'Times New Roman', Times, serif;
+
+  /* --- Type scale (rem, D-01/D-02) ---
+   * Body base = 1rem (16px) — intentionally departs from the engine's 15px base;
+   * aligns with Starlight's own 16px default (RESEARCH.md / GROUNDWORK-R4 fact 4).
+   * Steps are a sound starting point; exact scale is a design-vet tuning call. */
+  --text-xs: 0.875rem;   /* 14px — fine print / meta */
+  --text-sm: 0.9375rem;  /* 15px — secondary UI text (engine's old body size) */
+  --text-base: 1rem;     /* 16px — body copy (D-02) */
+  --text-h3: 1.25rem;    /* 20px */
+  --text-h2: 1.75rem;    /* 28px */
+  --text-h1: 2.25rem;    /* 36px */
+  --leading: 1.5;
+
+  /* --- Spacing scale (rem) — for the landing to consume instead of hardcoded px --- */
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-5: 3rem;     /* 48px */
+
+  /* --- Color — light default (D-04, from _colors.scss) --- */
+  --color-ink: #191919;
+  --color-ink-2: #6e6e6e;
+  --color-ink-3: #8a8a8a;
+  --color-bg: #ffffff;
+  --color-hover: #f6f6f6;
+  --color-border: #e4e4e4;
+  --color-border-light: #f1f1f1;
+  --color-link: var(--color-ink); /* R1 — link == ink, no ad-hoc blue */
+
+  /* Badge/accent-only — NEVER a text/link role (R3: fails WCAG AA as text, ~1.9:1 on white).
+   * Fresh link/highlight accent is deliberately deferred (D-05); this is the
+   * inherited engine cyan, kept for potential badge/accent use only. */
+  --color-accent-badge: #44bcf9;
+}
+
+/* Standalone landing has no theme toggle — follows OS preference (D-08 defers
+ * the shared header; RESEARCH.md Pitfall 3 documents this as an accepted,
+ * scoped limitation, not a bug). Straight neutral inversion (D-06) — no
+ * accent-specific dark tuning needed since the fresh accent is deferred. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-ink: #f2f2f2;
+    --color-ink-2: #a3a3a3;
+    --color-ink-3: #8a8a8a;
+    --color-bg: #17181c;
+    --color-hover: #202127;
+    --color-border: #33343a;
+    --color-border-light: #26272c;
+    --color-link: var(--color-ink);
+  }
+}
+
+/* Starlight's theme toggle sets `data-theme` on <html> (ThemeProvider.astro,
+ * pre-paint, no FOUC) — mirror the same derived dark set here so both surfaces
+ * flip together on the same token values (SC#3). */
+:root[data-theme='dark'] {
+  --color-ink: #f2f2f2;
+  --color-ink-2: #a3a3a3;
+  --color-ink-3: #8a8a8a;
+  --color-bg: #17181c;
+  --color-hover: #202127;
+  --color-border: #33343a;
+  --color-border-light: #26272c;
+  --color-link: var(--color-ink);
+}
