@@ -5,6 +5,10 @@
 import '../styles/tokens.css';
 
 const base = import.meta.env.BASE_URL;
+
+// External targets (D-04): bare strings, no base prefix.
+const DEMO_URL = 'https://subfolio-astro.ilano.fyi';
+const GITHUB_URL = 'https://github.com/ryanilano/subfolio-astro';
 ---
 
 <html lang="en">
@@ -13,9 +17,15 @@ const base = import.meta.env.BASE_URL;
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
 		<title>subfolio-astro-docs</title>
+		<meta
+			name="description"
+			content="Point it at a folder of files and get a polished, navigable website — no CMS, no database, no page-building."
+		/>
 		<style>
 			/* Consumes the shared token layer (tokens.css) — no bespoke --bg/--fg/--link
-			   and no ad-hoc blues; retired in favor of --color-* (D-01/D-04). */
+			   and no ad-hoc blues; retired in favor of --color-* (D-01/D-04). Every
+			   value below is a var(--...) token; no interpolation happens inside this
+			   block (AGENTS.md: Astro does not evaluate {expr} in <style>). */
 			* {
 				box-sizing: border-box;
 			}
@@ -27,29 +37,88 @@ const base = import.meta.env.BASE_URL;
 				min-height: 100vh;
 				display: flex;
 				flex-direction: column;
-				justify-content: center;
-				align-items: flex-start;
-				gap: var(--space-2);
-				padding: var(--space-5) var(--space-3);
 				background: var(--color-bg);
 				color: var(--color-ink);
 				font-family: var(--font-sans);
 				font-size: var(--text-base);
 				line-height: var(--leading);
 			}
+
+			/* --- Header / nav (D-03: token-driven, matches Starlight's header via
+			   shared tokens + matching nav labels only — no component sharing) --- */
+			.site-header {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: var(--space-2);
+				padding: var(--space-2) var(--space-3);
+				border-bottom: 1px solid var(--color-border);
+			}
+			.logo {
+				font-weight: 600;
+				font-size: var(--text-h3);
+				color: var(--color-ink);
+				text-decoration: none;
+			}
+			.site-nav {
+				display: flex;
+				flex-wrap: wrap;
+				gap: var(--space-3);
+			}
+			.site-nav a {
+				min-height: 44px;
+				display: inline-flex;
+				align-items: center;
+				color: var(--color-ink-2);
+				text-decoration: none;
+				font-size: var(--text-sm);
+			}
+			.site-nav a:hover,
+			.site-nav a:focus-visible {
+				color: var(--color-link);
+			}
+
+			/* --- Hero (LAND-01) --- */
+			main {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				gap: var(--space-5);
+				padding: var(--space-5) var(--space-3);
+			}
 			@media (min-width: 640px) {
-				body {
+				main {
 					padding: var(--space-5) var(--space-4);
 				}
 			}
+			.hero {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				gap: var(--space-2);
+				max-width: 42rem;
+			}
 			h1 {
 				margin: 0;
-				font-size: var(--text-h2);
+				font-size: var(--text-h1);
 				font-weight: 600;
 				line-height: 1.2;
 			}
+			.lede {
+				margin: 0;
+				font-size: var(--text-h3);
+				color: var(--color-ink-2);
+			}
 			p {
 				margin: 0;
+			}
+			.cta-row {
+				display: flex;
+				flex-wrap: wrap;
+				gap: var(--space-2);
+				margin-top: var(--space-2);
 			}
 			a.cta {
 				/* padding lifts the visible link to a 44px min tap target (UI-SPEC Spacing);
@@ -62,11 +131,87 @@ const base = import.meta.env.BASE_URL;
 				text-decoration: underline;
 				text-underline-offset: 8px;
 			}
+			a.cta-primary {
+				color: var(--color-bg);
+				background: var(--color-accent);
+				text-decoration: none;
+				border-radius: 0.25rem;
+			}
+
+			/* --- Supporting pillars (LAND-02) --- */
+			.pillars {
+				display: grid;
+				gap: var(--space-4);
+				width: 100%;
+				max-width: 60rem;
+				grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+			}
+			.pillar h2 {
+				margin: 0 0 var(--space-1);
+				font-size: var(--text-h3);
+				font-weight: 600;
+			}
+			.pillar p {
+				color: var(--color-ink-2);
+			}
+
+			.site-footer {
+				padding: var(--space-3);
+				border-top: 1px solid var(--color-border);
+				color: var(--color-ink-3);
+				font-size: var(--text-xs);
+			}
 		</style>
 	</head>
 	<body>
-		<h1>subfolio-astro-docs</h1>
-		<p>Documentation site — under construction.</p>
-		<a class="cta" href={`${base}docs/`}>View the Docs</a>
+		<header class="site-header">
+			<a class="logo" href={base}>subfolio-astro-docs</a>
+			<nav class="site-nav">
+				<a href={`${base}docs/`}>Docs</a>
+				<a href={`${base}docs/changes/`}>Changes</a>
+				<a href={DEMO_URL}>Demo</a>
+				<a href={GITHUB_URL}>GitHub</a>
+			</nav>
+		</header>
+
+		<main>
+			<section class="hero">
+				<h1>Point it at a folder of files. Get a polished website.</h1>
+				<p class="lede">
+					No CMS. No database. No page-building. The filesystem <em>is</em> the site — straight
+					out of the box.
+				</p>
+				<div class="cta-row">
+					<a class="cta cta-primary" href={`${base}docs/getting-started/`}>Get Started</a>
+					<a class="cta" href={`${base}docs/`}>View the Docs</a>
+					<a class="cta" href={DEMO_URL}>See the Demo</a>
+				</div>
+			</section>
+
+			<section class="pillars">
+				<div class="pillar">
+					<h2>Conventions do the work</h2>
+					<p>
+						File and folder naming encodes structure — embeds, enhancers, feature cards, access
+						rules. "You don't do much manually" is literally true.
+					</p>
+				</div>
+				<div class="pillar">
+					<h2>Revived &amp; modernized</h2>
+					<p>
+						A great tool that had gone dead on an end-of-life stack, brought back as a fast,
+						static Astro site.
+					</p>
+				</div>
+				<div class="pillar">
+					<h2>Real-world proven</h2>
+					<p>Used for actual portfolios, and for sharing assets on large projects.</p>
+				</div>
+			</section>
+		</main>
+
+		<footer class="site-footer">
+			<p>A port of <a href={GITHUB_URL}>Subfolio</a>, reborn as a static Astro site.</p>
+		</footer>
 	</body>
 </html>
