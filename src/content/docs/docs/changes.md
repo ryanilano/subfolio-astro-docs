@@ -54,3 +54,15 @@ each folder entry — but access control is **not currently enforced**. Enforcem
 is deferred to an optional Cloudflare Worker (auth) that has not been built. Until
 that Worker exists, every folder served by this port is public, whether or not it
 carries an `-access` file.
+
+<details>
+<summary>Want the full engineering deep-dive?</summary>
+
+This page covers the headline changes only. A full architecture / milestone-history
+/ key-decisions deep-dive is planned for a future v2 release (tracked as `DEEP-01`).
+For now, the engine repo's own
+[CLAUDE.md](https://github.com/ryanilano/subfolio-astro/blob/main/CLAUDE.md) and
+[docs/ROADMAP.md](https://github.com/ryanilano/subfolio-astro/blob/main/docs/ROADMAP.md)
+are the canonical interim source — nothing here re-derives their content.
+
+</details>
