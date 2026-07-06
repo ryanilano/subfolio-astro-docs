@@ -1,0 +1,55 @@
+---
+title: Thumbnails
+description: The -thumbnails auto-generated and -thumbnails-custom override convention.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+Thumbnails live in two hidden folders next to the images they belong to:
+`-thumbnails/` (auto-generated) and `-thumbnails-custom/` (manually provided,
+overrides the auto-generated version). Both are hidden from listings — see
+[Hidden Items](/subfolio-astro-docs/docs/conventions/hidden-items/).
+[Source: `docs/spec/SPEC-thumbnails.md` §3.1]
+
+<FileTree>
+- content/examples/
+  - 00_thumbnails/
+    - -t-readme.txt
+    - example.gif
+    - example.jpg
+    - example.png
+    - -thumbnails/
+      - example.gif
+      - example.jpg
+      - example.png
+    - -thumbnails_custom/
+      - -t-readme.txt
+  - 03_featuring_content/
+    - -thumbnails-custom/
+      - file_thumbnail.png
+      - folder_thumbnail.png
+      - link_thumbnail.png
+</FileTree>
+
+`00_thumbnails/-t-readme.txt`:
+
+```txt
+# Thumbnails
+
+## Enhancer
+
+Thumbnails are automatically created for browser-viewable images (unless they are too big). To create custom thumbnails, see <a href="00_thumbnails/-thumbnails_custom/">-thumbnails_custom</a> folder.
+```
+
+**Result:** `-thumbnails/` is canonical — the auto-generated thumbnail cache the
+build pipeline writes images into. Both `-thumbnails-custom` (hyphen) and
+`-thumbnails_custom` (underscore) spellings are accepted for the manual-override
+folder; if a custom thumbnail exists for a filename, it's served instead of the
+auto-generated one, with no size or staleness check. `03_featuring_content/`'s
+`-thumbnails-custom/` folder is the one referenced by that folder's
+[`.ftr` feature cards](/subfolio-astro-docs/docs/conventions/enhancers/#ftr--feature-card).
+[Source: `docs/spec/SPEC-thumbnails.md` §3.1, §3.4–§3.6; the accepted-spellings
+set is confirmed directly in the loader — `src/loaders/conventions.ts`
+`THUMBNAIL_DIRS = new Set(["-thumbnails", "-thumbnails-custom", "-thumbnails_custom"])`]
+
+[See it live →](https://subfolio-astro.ilano.fyi/00_thumbnails/)

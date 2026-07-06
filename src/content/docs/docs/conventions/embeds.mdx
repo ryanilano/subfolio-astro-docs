@@ -1,0 +1,99 @@
+---
+title: Position Embeds
+description: The -t-/-m-/-b- position-embed convention for inline text, images, and RSS feeds.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+Files prefixed `-t-`, `-m-`, or `-b-` are inline content embeds positioned at the
+**t**op, **m**iddle, or **b**ottom of a folder listing. They're normally hidden (any
+name starting with `-` is hidden — see [Hidden Items](/subfolio-astro-docs/docs/conventions/hidden-items/))
+but the loader fetches them explicitly for their position. Three content types are
+supported per position: text, images, and RSS feeds.
+
+## Text and image embeds
+
+<FileTree>
+- content/examples/
+  - -t-introduction.txt
+  - -b-footer.txt
+  - 01_embedding_text_images/
+    - -t-top-text.txt
+    - -t-top-image.png
+    - -m-middle_text.txt
+    - -m-middle-image.png
+    - -b-bottom-text.txt
+    - -b-bottom-image.png
+    - -hidden/
+    - file-listing-placeholder-01.txt
+    - file-listing-placeholder-02.txt
+    - file-listing-placeholder-03.txt
+</FileTree>
+
+`-t-top-text.txt`:
+
+```txt
+# Embedding text and images
+
+## Top of page
+
+<pre><code>-t-top-text.txt</code></pre>
+
+This text will appear at the top of the page, **above any images or features** you may have in the folder. You can use textile, markdown or html.  Set your preference in your settings.
+```
+
+`-m-middle_text.txt` (note the underscore — the fixture's real filename, not a typo):
+
+```txt
+# Embedding text and images
+
+## Middle of page
+
+
+<pre><code>-m-middle-text.txt</code></pre>
+
+This text will appear on the top of the page, **below any images or features** you may have in the folder, but above the file listing. You can use textile, markdown or html. Set your preference in your settings.
+```
+
+**Result:** the loader groups matching files into a folder entry's `embeds.top` /
+`embeds.middle` / `embeds.bottom`, and the listing renders each group's text and
+images before, between, or after the file grid — top text above everything, middle
+text between the folder grid and the file grid, bottom text below the whole listing.
+Root-level files (`-t-introduction.txt`, `-b-footer.txt`) work the same way at the
+content root. [Source: `docs/spec/SPEC-conventions.md` §2]
+
+[See it live →](https://subfolio-astro.ilano.fyi/01_embedding_text_images/)
+
+## RSS feed embeds (`.rss`)
+
+The same top/middle/bottom positioning applies to `.rss` files — an embedded feed
+renders wherever its prefix places it. This fixture group's directory name has a
+literal space, not the `NN_` underscore pattern used elsewhere:
+
+<FileTree>
+- content/examples/
+  - 05 display rss feed/
+    - -t-readme.txt
+    - rss-enhancer.rss
+    - -rss-enhancer.rss.cache
+</FileTree>
+
+`rss-enhancer.rss`:
+
+```yaml
+# YAML NOTE: Indentation, spacing and text case are super important.
+# This file must be encoded as Unicode (UTF-8) for it to work properly.
+
+# Note: It may take a few minutes to work for the first time.
+
+feedurl: http://feeds.feedburner.com/area17/news
+count: 10  # maxiumum number of items to show
+cache: 3600 # number of seconds to cache the feed for
+```
+
+**Result:** the loader reads `feedurl`, `count`, and `cache` from the YAML body and
+fetches the feed, caching the parsed result in a hidden sidecar file named
+`-<original-filename>.cache` (here, `-rss-enhancer.rss.cache`) for the configured
+number of seconds. [Source: `docs/spec/SPEC-conventions.md` §3.6]
+
+[See it live →](https://subfolio-astro.ilano.fyi/05%20display%20rss%20feed/)

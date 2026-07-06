@@ -1,0 +1,56 @@
+---
+title: '-access'
+description: The -access convention for folder access rules — parsed, not enforced.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+:::caution[Parsed, not enforced]
+`-access` rules are **parsed and captured** by the content loader, but access
+control is **not currently enforced** at request time. Enforcement is deferred to
+a future optional Auth Worker (see the engine's `CLAUDE.md` phase roadmap — Phase 4,
+deferred until access-gated folders are a real need). Treat any `-access`-marked
+folder in a live deployment as **publicly reachable today**.
+:::
+
+<FileTree>
+- content/examples/
+  - 07_protecting_a_folder/
+    - -t-readme.txt
+    - -access
+</FileTree>
+
+`-access`:
+
+```yaml
+# YAML NOTE: Indentation, spacing and text case are super important.
+# This file must be encoded as Unicode (UTF-8) for it to work properly.
+
+# Note: Users and groups have to be created first in your settings before this will work.
+
+allow_users: [username, username, etc]
+allow_groups: [groupname, groupname, etc]
+deny_users: [username, username, etc]
+deny_groups: [groupname, groupname, etc]
+Does not apply to sub-folders:
+
+current_folder:
+ allow_users: [username, username, etc]
+ allow_groups: [groupname, groupname, etc]
+ deny_users: [username, username, etc]
+ deny_groups: [groupname, groupname, etc]
+```
+
+**What the loader does today:** an `-access` file's `allow_users` / `allow_groups` /
+`deny_users` / `deny_groups` rules (plus the folder-scoped `current_folder` variant)
+are parsed and captured as typed data on the folder entry — this is *intent
+capture*, not gating. [Source: `docs/spec/SPEC-access.md` §1–§3]
+
+**What it does NOT do yet:** no request is ever denied because of an `-access`
+file. There's no login, no session, and no `check_access()` equivalent running at
+build or request time in this static site — every page under a `-access`-marked
+folder builds and serves exactly like any other. This is the honest state of the
+feature today, not a bug: the port's own roadmap explicitly defers auth
+enforcement.
+
+[See it live →](https://subfolio-astro.ilano.fyi/07_protecting_a_folder/)
