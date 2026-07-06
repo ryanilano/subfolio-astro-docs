@@ -1,0 +1,45 @@
+---
+title: Hidden Items
+description: The -hidden folder and dot-prefix convention for excluding files from listings.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+A file or folder is hidden from normal directory listings when its name starts with
+`-` (dash) or `.` (dot) — or ends with the configured info (`.info`), feature
+(`.ftr`), or shortcut (`.cut`) extension. Hidden items are skipped when building a
+listing, but the loader still reads them explicitly wherever they're needed — for
+[position embeds](/subfolio-astro-docs/docs/conventions/embeds/), features, and
+shortcuts. [Source: `docs/spec/SPEC-conventions.md` §1, `src/loaders/conventions.ts`
+`isHidden()`]
+
+<FileTree>
+- content/examples/
+  - -hidden/
+    - -t-this_file_is_hidden.txt
+  - 01_embedding_text_images/
+    - -hidden/
+      - -t-top-image.png
+      - -m-middle-image.png
+      - -b-bottom-image.png
+</FileTree>
+
+`-hidden/-t-this_file_is_hidden.txt`:
+
+```txt
+# Hiding content
+
+## Enhancer
+
+Did you know that you can hide any file or folder simply by putting a dash in the name? For example, this folder is called -hidden (look in the URL) and if you didn't notice, it wasn't listed in the file listing.
+
+Of course, you can still get to it via direct URL.
+```
+
+**Result:** neither `-hidden/` folder appears in its parent's listing — but each is
+still directly reachable by URL, and the nested `01_embedding_text_images/-hidden/`
+folder's own `-t-`/`-m-`/`-b-` images are still read as position embeds, exactly
+like the non-hidden ones in the parent folder. Hiding controls *listing visibility
+only*, never reachability.
+
+[See it live →](https://subfolio-astro.ilano.fyi/-hidden/)
