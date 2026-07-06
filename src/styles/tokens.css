@@ -7,8 +7,8 @@
  *   - rem-first: all scalable font-size/width/height values are rem, off a 16px root,
  *     so browser/device zoom scales the whole system. No hardcoded px for scalable dims.
  *   - single swappable --font-sans (D-03) so a later font swap touches one line.
- *   - swappable --color-* tokens (D-04/D-05) — monochrome/neutral baseline now; the
- *     eventual "fresh" accent is a later drop-in, not decided here.
+ *   - swappable --color-* tokens (D-04/D-05) — monochrome/neutral baseline from
+ *     Phase 2; the fresh accent (D-01, Phase 3) lands as --color-accent below.
  *
  * Values ported verbatim from the engine's shipping theme:
  *   subfolio-astro/config/themes/default/css/_colors.scss
@@ -63,18 +63,22 @@
   --color-hover: #f6f6f6;
   --color-border: #e4e4e4;
   --color-border-light: #f1f1f1;
-  --color-link: var(--color-ink); /* R1 — link == ink, no ad-hoc blue */
+
+  /* Fresh link/highlight accent (D-01, Phase 3) — a distinct blue family from
+   * the reserved --color-accent-badge below. Contrast vs --color-bg (#ffffff)
+   * computed 2026-07-06: #1a5fb4 = 6.29:1 (>=4.5:1 AA for text use). */
+  --color-accent: #1a5fb4;
+  --color-link: var(--color-accent); /* D-01 — link now rides the fresh accent, not ink */
 
   /* Badge/accent-only — NEVER a text/link role (R3: fails WCAG AA as text, ~1.9:1 on white).
-   * Fresh link/highlight accent is deliberately deferred (D-05); this is the
-   * inherited engine cyan, kept for potential badge/accent use only. */
+   * Kept for potential badge/accent use only; distinct from --color-accent above. */
   --color-accent-badge: #44bcf9;
 }
 
 /* Standalone landing has no theme toggle — follows OS preference (D-08 defers
  * the shared header; RESEARCH.md Pitfall 3 documents this as an accepted,
- * scoped limitation, not a bug). Straight neutral inversion (D-06) — no
- * accent-specific dark tuning needed since the fresh accent is deferred. */
+ * scoped limitation, not a bug). Neutral tokens invert straight (D-06); the
+ * accent gets its own dark-tuned value (lighter, same hue family) below. */
 /* Scoped to :not([data-theme]) — Starlight always sets a concrete `data-theme`
  * attribute (light or dark, never absent) before first paint, so this media
  * query only ever matches the landing (no attribute, OS-driven). Without this
@@ -90,7 +94,12 @@
     --color-hover: #202127;
     --color-border: #33343a;
     --color-border-light: #26272c;
-    --color-link: var(--color-ink);
+
+    /* Contrast vs --color-bg (#17181c) computed 2026-07-06:
+     * #5aa9e6 = 6.97:1 (>=4.5:1 AA for text use). Same blue family as the
+     * light-mode accent (hue ~206-213deg), lightened for dark-bg legibility. */
+    --color-accent: #5aa9e6;
+    --color-link: var(--color-accent);
   }
 }
 
@@ -105,5 +114,9 @@
   --color-hover: #202127;
   --color-border: #33343a;
   --color-border-light: #26272c;
-  --color-link: var(--color-ink);
+
+  /* Same computed values as the OS-dark block above (contrast 6.97:1 vs
+   * --color-bg #17181c) — Starlight's explicit dark toggle mirrors OS-dark. */
+  --color-accent: #5aa9e6;
+  --color-link: var(--color-accent);
 }
