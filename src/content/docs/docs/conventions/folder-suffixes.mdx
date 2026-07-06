@@ -1,0 +1,73 @@
+---
+title: Folder Suffixes
+description: The .site / .slide / .oplx folder-extension conventions.
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+
+A folder whose name ends in `.site`, `.slide`, or `.oplx` is treated as a single
+item rather than a regular folder to browse into — each suffix changes what
+happens when you visit it. [Source: `docs/spec/SPEC-conventions.md` §3.7, §3.8, §3.4]
+
+## `.site` — mini site / HTML prototype
+
+<FileTree>
+- content/examples/
+  - 04_html_prototype/
+    - -t-readme.txt
+    - 04_html_prototype.site/
+      - index.html
+</FileTree>
+
+**Result:** a `.site` folder must contain an `index.html`; visiting it renders that
+HTML directly as a single-item detail view instead of a folder listing — a way to
+host a self-contained HTML prototype inside a Subfolio tree.
+[Source: `docs/spec/SPEC-conventions.md` §3.7]
+
+[See it live →](https://subfolio-astro.ilano.fyi/04_html_prototype/04_html_prototype.site/)
+
+## `.slide` — slideshow
+
+This fixture's directory name has a literal space, not the `NN_` underscore
+pattern used elsewhere:
+
+<FileTree>
+- content/examples/
+  - 06 slideshow.slide/
+    - -t-readme.txt
+    - slideshow.slide/
+      - example.gif
+      - example.jpg
+      - example.png
+</FileTree>
+
+**Result:** a `.slide` folder redirects the browser straight to its first file
+instead of showing a listing, then offers prev/next navigation between the
+remaining files — a linear slideshow-browsing experience.
+[Source: `docs/spec/SPEC-conventions.md` §3.8]
+
+[See it live →](https://subfolio-astro.ilano.fyi/06%20slideshow.slide/)
+
+## `.oplx` — OmniPlan archive
+
+<FileTree>
+- content/examples/
+  - 08_project_plan.oplx/
+    - README
+    - contents/
+      - data.xml
+      - notes.txt
+</FileTree>
+
+`README`:
+
+```txt
+OmniPlan package
+```
+
+**Result:** an `.oplx` folder is treated as a single-item detail view (like
+`.site`), and when served through the raw `/directory/` byte route it's zipped on
+the fly and returned as a `.zip` download instead of a directory listing.
+[Source: `docs/spec/SPEC-conventions.md` §3.4]
+
+[See it live →](https://subfolio-astro.ilano.fyi/08_project_plan.oplx/)
