@@ -1,0 +1,33 @@
+---
+title: Point it at a folder of files. Get a polished website.
+description: No CMS. No database. No page-building. The filesystem is the site.
+template: splash
+hero:
+  tagline: No CMS. No database. No page-building. The filesystem <em>is</em> the site — straight out of the box.
+  layout: centered
+  actions:
+    - text: Get Started
+      link: /subfolio-astro-docs/docs/getting-started/
+      variant: primary
+      icon: right-arrow
+    - text: View the Docs
+      link: /subfolio-astro-docs/docs/
+      variant: secondary
+    - text: See the Demo
+      link: https://ryanilano.github.io/subfolio-astro/
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<Card title="Conventions do the work">
+		File and folder naming encodes structure — embeds, enhancers, feature cards, access rules. "You don't do much manually" is literally true.
+	</Card>
+	<Card title="Revived & modernized">
+		A great tool that had gone dead on an end-of-life stack, brought back as a fast, static Astro site.
+	</Card>
+	<Card title="Real-world proven">
+		Used for actual portfolios, and for sharing assets on large projects.
+	</Card>
+</CardGrid>

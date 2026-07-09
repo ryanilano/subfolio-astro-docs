@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import lucode from 'lucode-starlight';
 
 // https://astro.build/config
 // Served at the raw GitHub Pages *project* path (D-05): site = the user's Pages
@@ -12,7 +13,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'subfolio-astro-docs',
-      customCss: ['./src/styles/tokens.css', './src/styles/starlight-theme.css'],
+      customCss: ['./src/styles/font.css'],
       sidebar: [
         { label: 'Getting Started', slug: 'docs/getting-started' },
         {
@@ -27,6 +28,32 @@ export default defineConfig({
           ],
         },
         { label: 'Changes & Improvements', slug: 'docs/changes' },
+      ],
+      plugins: [
+        lucode({
+          // THEME-02: internal links are base-relative paths WITHOUT the
+          // /subfolio-astro-docs/ prefix baked in — lucode's NavBar.astro
+          // routes every non-absolute nav.link through Astro's
+          // getRelativeLocaleUrl(), which itself prepends the configured
+          // `base` (verified from node_modules/lucode-starlight/components/
+          // overrides/parts/NavBar.astro + astro/dist/virtual-modules/i18n.js).
+          // Baking the prefix in here double-prefixes the rendered href
+          // (RESEARCH's stated Pitfall 2 did not hold for this navLinks
+          // renderer — deviation documented in SUMMARY). Demo link is
+          // absolute/external and passes through untouched.
+          navLinks: [
+            { label: 'Docs', link: '/docs/getting-started/' },
+            { label: 'Conventions', link: '/docs/conventions/embeds/' },
+            { label: 'Changes', link: '/docs/changes/' },
+            { label: 'Demo', link: 'https://ryanilano.github.io/subfolio-astro/' },
+          ],
+          // CONT-04: canonical AGPL-3.0 / AREA17 / port attribution, reused
+          // verbatim from content/examples/-b-footer.txt (engine repo) + this
+          // repo's README §License — NOT lucode's default "Inspired by
+          // shadcn/ui" credit (RESEARCH Pitfall 5).
+          footerText:
+            '© 2026 Subfolio-Astro by Ryan Ilano. An Astro port of [Subfolio](https://github.com/area17/subfolio) by [AREA17](https://area17.com) [[AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html)] — [source](https://github.com/ryanilano/subfolio-astro).',
+        }),
       ],
     }),
   ],
