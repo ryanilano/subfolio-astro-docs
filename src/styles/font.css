@@ -1,0 +1,21 @@
+/*
+ * The ONLY bespoke CSS that survives D5-04 (Phase 2 token/CSS layer retirement).
+ * UNLAYERED :root beats @layer lucode (CSS Cascade Layers spec) — no !important.
+ *
+ * Self-hosted Inter (D5-02): lucode ships no font of its own (verified against
+ * the 0.1.6 tarball — zero @font-face, zero --sl-font, zero CDN import; its CSS
+ * uses font-family: inherit). Keeping Inter is the only real choice under D5-02's
+ * rule (off-brand is a hard no; prefer Inter over a system-stack or CDN fallback).
+ */
+
+@font-face {
+  font-family: 'Inter';
+  src: url('../fonts/Inter-Variable-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --sl-font: 'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+}
