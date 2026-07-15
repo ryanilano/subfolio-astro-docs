@@ -12,7 +12,7 @@ export default defineConfig({
   base: '/subfolio-astro-docs/',
   integrations: [
     starlight({
-      title: 'subfolio-astro-docs',
+      title: 'Subfolio-Astro Docs',
       customCss: ['./src/styles/font.css'],
       sidebar: [
         { label: 'Getting Started', slug: 'docs/getting-started' },
@@ -28,6 +28,19 @@ export default defineConfig({
           ],
         },
         { label: 'Changes & Improvements', slug: 'docs/changes' },
+        {
+          label: 'The Port Journey',
+          items: [
+            { label: 'Overview', slug: 'docs/journey' },
+            { label: 'Why the Port', slug: 'docs/journey/why-the-port' },
+            { label: 'Architecture', slug: 'docs/journey/architecture' },
+            { label: 'The DeepSeek Workflow', slug: 'docs/journey/deepseek-workflow' },
+            { label: 'Performance', slug: 'docs/journey/performance' },
+            { label: 'SEO', slug: 'docs/journey/seo' },
+            { label: 'Security', slug: 'docs/journey/security' },
+            { label: 'Deploying for Free', slug: 'docs/journey/free-deploy' },
+          ],
+        },
       ],
       plugins: [
         lucode({
@@ -45,6 +58,7 @@ export default defineConfig({
             { label: 'Docs', link: '/docs/getting-started/' },
             { label: 'Conventions', link: '/docs/conventions/embeds/' },
             { label: 'Changes', link: '/docs/changes/' },
+            { label: 'Journey', link: '/docs/journey/' },
             { label: 'Demo', link: 'https://ryanilano.github.io/subfolio-astro/' },
           ],
           // CONT-04: canonical AGPL-3.0 / AREA17 / port attribution, reused

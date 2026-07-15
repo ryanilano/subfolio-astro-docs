@@ -1,0 +1,55 @@
+---
+title: The Port Journey
+description: The full engineering story of the Subfolio port — every phase, every decision, what changed and what it bought.
+---
+
+This section is the deep-dive that [Changes & Improvements](/subfolio-astro-docs/docs/changes/)
+summarizes: the full story of taking Subfolio from a dead **Kohana 2.x / PHP 5.6** stack to a
+static **Astro** site on Cloudflare Pages — including how the work itself was built with a
+DeepSeek fan-out workflow behind a Claude Code proxy. The same rule applies here as
+everywhere on this site: every figure is quoted from a committed, already-measured engine
+document or a primary source — nothing is a recalled number.
+
+## The short timeline
+
+The engine repo's [`docs/ROADMAP.md`](https://github.com/ryanilano/subfolio-astro/blob/main/docs/ROADMAP.md)
+is the canonical phase record; its history is visible commit-by-commit in the
+[repo log](https://github.com/ryanilano/subfolio-astro/commits/main/). In order:
+
+1. **Phase 0 — Capture the spec.** Behavior extracted from the PHP engine
+   (`Filebrowser.php` / `Subfolio.php` / `FileKind.php`) into eight stack-agnostic specs
+   ([`docs/spec/`](https://github.com/ryanilano/subfolio-astro/tree/main/docs/spec)), so the
+   port had a contract before it had code.
+2. **Phase 1 — Astro content loader.** The riskiest piece first: a custom loader that walks
+   a Subfolio `directory/` tree and interprets every naming convention as typed data.
+3. **Phase 2 — Themes → Astro components.** The `default` theme's PHP views ported to Astro
+   components on real routes, keeping markup and CSS close enough to diff visually against
+   the live PHP app.
+4. **Phase 3 — Build pipeline & deploy.** `sharp` thumbnails, RSS fetch, and sass at build
+   time; live on Cloudflare Pages with test-gated GitHub Actions auto-deploy.
+5. **Phase 5 — Enhancer polish.** Markdown body rendering, `.pop` popups, `.slide`
+   slideshows fixed, `.oplx` build-time zip artifacts. (Phase 4 — an auth Worker enforcing
+   `-access` — is deliberately deferred until gated folders are a real need.)
+6. **WCAG 2.1 AA accessibility pass**, later wired into CI as a deploy gate.
+7. **Milestone 6 — Performance & build modernization.** Five phases (A–E) of measured
+   asset, image-format, JS, and SEO work — the numbers behind the
+   [Performance](/subfolio-astro-docs/docs/journey/performance/) and
+   [SEO](/subfolio-astro-docs/docs/journey/seo/) pages.
+8. **The curated demo front door** and AGPL attribution polish that shipped the public demo.
+
+## The pages
+
+- **[Why the Port](/subfolio-astro-docs/docs/journey/why-the-port/)** — the EOL stack, and
+  the Go detour that came before Astro
+- **[Architecture](/subfolio-astro-docs/docs/journey/architecture/)** — request-time PHP to
+  build-time static: what carried over, what was rewritten
+- **[The DeepSeek Workflow](/subfolio-astro-docs/docs/journey/deepseek-workflow/)** — how
+  the port was actually built: the DeepClaude proxy, the fan-out pattern, and what it cost
+- **[Performance](/subfolio-astro-docs/docs/journey/performance/)** — the measured
+  before/after: fonts, CSS, deferred JS, WebP/AVIF thumbnails
+- **[SEO](/subfolio-astro-docs/docs/journey/seo/)** — canonical URLs, Open Graph, Twitter
+  Cards, and the test suite that gates the deploy on them
+- **[Security](/subfolio-astro-docs/docs/journey/security/)** — the attack surface a static
+  port removes, what it doesn't, and one honest incident postmortem
+- **[Deploying for Free](/subfolio-astro-docs/docs/journey/free-deploy/)** — Cloudflare
+  Pages + GitHub Pages, and what the PHP original required instead
