@@ -12,7 +12,7 @@
 
 - The product spelling is exactly `Subfolio-Astro` — capital S, capital A, hyphen, no space.
 - NEVER modify: link targets (`](/subfolio-astro-docs/...)`), GitHub URLs (`github.com/ryanilano/subfolio-astro/...`), the domain `subfolio-astro.ilano.fyi`, the `base: '/subfolio-astro-docs/'` path, `package.json` `"name"`, or any backticked code span (`Subfolio.php`, `` `Filebrowser`/`Subfolio`/`Access` ``).
-- NEVER change plain "Subfolio" where it refers to the original AREA17 PHP product or the `directory/` tree format. The full keep-list (13 mentions) is in the spec's "Explicitly kept as-is" section — treat it as authoritative.
+- NEVER change plain "Subfolio" where it refers to the original AREA17 PHP product or the `directory/` tree format. The full keep-list (14 mentions) is in the spec's "Explicitly kept as-is" section — treat it as authoritative.
 - Only the 6 edits listed in these tasks are in scope. If any other occurrence looks wrong, stop and report — do not edit it.
 
 ---
@@ -199,7 +199,7 @@ Run:
 ```bash
 grep -rn 'original Subfolio\|PHP Subfolio\|Subfolio `directory/`\|a Subfolio tree\|Subfolio install' src/content/docs --include='*.md' --include='*.mdx' | wc -l
 ```
-Expected: `8` — the matching lines are changes.md:14, why-the-port.md:8, free-deploy.md:8, free-deploy.md:27, free-deploy.md:38, journey/index.mdx:24, getting-started.md:21, and folder-suffixes.mdx:24 (verified against the pre-edit tree). If the count differs, diff against the spec's keep-list line by line. Note this grep intentionally covers 8 of the spec's 13 keep-list mentions; the remaining 5 (journey/index.mdx:3 and :7 prose, and the 3 backticked code-identifier lines) are covered by the diff audit in Step 3, since no task touches those files.
+Expected: `8` — the matching lines are changes.md:14, why-the-port.md:8, free-deploy.md:8, free-deploy.md:27, free-deploy.md:38, journey/index.mdx:24, getting-started.md:21, and folder-suffixes.mdx:24 (verified against the pre-edit tree). If the count differs, diff against the spec's keep-list line by line. Note this grep intentionally covers 8 of the spec's 14 keep-list mentions; the remaining 6 (journey/index.mdx:3 and :7 prose, and the 4 backticked code-identifier lines in changes.md:28, architecture.md:19, architecture.md:27, and journey/index.mdx:20) are verified by their absence from the change set — no task touches those files, so any appearance of them in the Step 3 diff audit is itself a failure.
 
 - [ ] **Step 3: Link/URL audit — no technical token changed**
 

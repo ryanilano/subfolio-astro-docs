@@ -45,7 +45,7 @@ no find-and-replace rule is safe.
 `changes.md:6` ("Subfolio-Astro is a **port**…") is already correct — verify
 only, no change.
 
-## Explicitly kept as-is (13 mentions)
+## Explicitly kept as-is (14 mentions)
 
 **Original PHP product:**
 
