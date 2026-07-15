@@ -1,9 +1,9 @@
 ---
-title: Subfolio Documentation
+title: Subfolio-Astro Documentation
 description: Start here — Getting Started, the Conventions reference, and Changes & Improvements.
 ---
 
-Subfolio turns a folder of files into a themeable website — no CMS, no database, no
+Subfolio-Astro turns a folder of files into a themeable website — no CMS, no database, no
 page-builder. Everything is driven by how you name your files and folders.
 
 - **[Getting Started](/subfolio-astro-docs/docs/getting-started/)** — install, run,
@@ -13,4 +13,4 @@ page-builder. Everything is driven by how you name your files and folders.
 - **[Changes & Improvements](/subfolio-astro-docs/docs/changes/)** — what changed in
   the port from PHP/Kohana to Astro, sourced.
 
-New to Subfolio? Start with [Getting Started](/subfolio-astro-docs/docs/getting-started/).
+New to Subfolio-Astro? Start with [Getting Started](/subfolio-astro-docs/docs/getting-started/).
