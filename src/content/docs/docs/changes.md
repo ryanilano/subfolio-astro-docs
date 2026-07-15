@@ -55,14 +55,19 @@ is deferred to an optional Cloudflare Worker (auth) that has not been built. Unt
 that Worker exists, every folder served by this port is public, whether or not it
 carries an `-access` file.
 
-<details>
-<summary>Want the full engineering deep-dive?</summary>
+## Want the full engineering deep-dive?
 
-This page covers the headline changes only. A full architecture / milestone-history
-/ key-decisions deep-dive is planned for a future v2 release (tracked as `DEEP-01`).
-For now, the engine repo's own
-[CLAUDE.md](https://github.com/ryanilano/subfolio-astro/blob/main/CLAUDE.md) and
-[docs/ROADMAP.md](https://github.com/ryanilano/subfolio-astro/blob/main/docs/ROADMAP.md)
-are the canonical interim source — nothing here re-derives their content.
+This page covers the headline changes only. The full story — every phase, every
+decision, and the workflow that built it — lives in
+**[The Port Journey](/subfolio-astro-docs/docs/journey/)**:
 
-</details>
+- [Why the Port](/subfolio-astro-docs/docs/journey/why-the-port/) — the EOL stack, the
+  security debt, and the Go detour
+- [Architecture](/subfolio-astro-docs/docs/journey/architecture/) — request-time to
+  build-time, behavior by behavior
+- [The DeepSeek Workflow](/subfolio-astro-docs/docs/journey/deepseek-workflow/) — how the
+  port was built, with a provable cost ledger
+- [Performance](/subfolio-astro-docs/docs/journey/performance/) ·
+  [SEO](/subfolio-astro-docs/docs/journey/seo/) ·
+  [Security](/subfolio-astro-docs/docs/journey/security/) ·
+  [Deploying for Free](/subfolio-astro-docs/docs/journey/free-deploy/)
