@@ -56,7 +56,13 @@ Scope (single post; a deeper series is parked for later): honest state of local 
 
 **Sources:** Ryan's lab and real runs. Any capability claim is demonstrated or cited — no benchmark numbers from memory.
 
-**Drafting note:** Ryan has already written most of this post (or substantial chunks). For post 2 the drafting model inverts: Ryan's existing draft is the source of truth; Claude structures, tightens, and fact-checks it rather than drafting from scratch. Ryan to point at where the draft material lives.
+**Drafting note:** Ryan has already written most of this material. For post 2 the drafting model inverts: Ryan's existing drafts are the source of truth; Claude structures, tightens, and fact-checks rather than drafting from scratch.
+
+**Known week-2 assets (as of 2026-07-16):**
+- Published: `local-ai-workflow.mdx` on ilano.fyi (2026-05-07) — the "why/overview" post already live; week 2 builds on it rather than starting the topic.
+- Complete draft: "Proxmox NVIDIA + CUDA Setup.md" — step-by-step GPU-passthrough-to-LXC guide (host `.run` + container `.run`, kernel pinning, apt fencing, nvidia-uvm boot unit). Contains one embedded `TODO(review)` about whether to call out silent divergences from the Digital Spaceport source guides — resolve at week-2 planning (lean: call them out; they're prime domain-judgment material). File's on-disk path needed from Ryan.
+- Benchmark evidence: `github.com/ryanilano/localai-16gb-bench` (harness) + `localai-16gb-bench-results` (per-run archives: throughput.csv, llama-bench JSON, versions.txt provenance, quality passes). Ryan reports the runs are based on Qwen3.6 releases — verify model identifiers from the run files at draft time. The provenance discipline of the archive is itself a point to feature.
+- Possible shape: week 2 becomes a mini-arc (overview already live → setup guide → capability/benchmark capstone); decide at week-2 planning.
 
 ### Week 3 — Post 3: The rug pull hedge
 
