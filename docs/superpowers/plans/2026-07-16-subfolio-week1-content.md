@@ -60,7 +60,7 @@ Expected: build succeeds. If baseline fails, stop — fix or report before addin
 Use WebFetch (or curl) on each; record URL + what was observed + date:
 
 1. `https://area17.com` (and its work/portfolio pages) — does the public portfolio list OpenAI, ElevenLabs, The New York Times as clients?
-2. On Area17's site, find the work/case-study listings for ElevenLabs and OpenAI — do live links exist? Do URL patterns or page structure indicate Subfolio (e.g., filesystem-convention paths, Subfolio's characteristic gallery URLs)? Record exact URLs.
+2. **`https://archive.area17.com`** — per Ryan, Area17's archive runs live on a version of Subfolio, with Subfolio components on most project pages. Verify: does it respond, do its URL patterns/page structure match Subfolio's filesystem conventions, and are there live ElevenLabs/OpenAI entries? Record exact URLs and what was observed. Also check regular area17.com project pages for Subfolio components.
 3. `https://www.php.net/eol.php` — PHP 5.6 EOL 2018-12-31 (already cited in changes.md; confirm link is live).
 4. `https://github.com/kohana/kohana/issues/110` — Kohana retirement 2017-07-01 (confirm link is live).
 
