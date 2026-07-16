@@ -54,6 +54,8 @@ Scope (single post; a deeper series is parked for later): honest state of local 
 
 **Sources:** Ryan's lab and real runs. Any capability claim is demonstrated or cited — no benchmark numbers from memory.
 
+**Drafting note:** Ryan has already written most of this post (or substantial chunks). For post 2 the drafting model inverts: Ryan's existing draft is the source of truth; Claude structures, tightens, and fact-checks it rather than drafting from scratch. Ryan to point at where the draft material lives.
+
 ### Week 3 — Post 3: The rug pull hedge
 
 Working title direction: "The subsidy will end: what Uber teaches us about AI pricing."
