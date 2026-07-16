@@ -69,7 +69,7 @@ Thesis: the subscription-vs-API price gap evidences VC subsidy, echoing rideshar
 ## Cadence, distribution, process
 
 - **Week 1:** case study + post 1 + positioning update, one PR in `ilano-fyi`. **Week 2:** post 2. **Week 3:** post 3. Each post is its own spec→draft→edit cycle under this umbrella plan.
-- **Per-post distribution checklist:** LinkedIn post drafted in Ryan's voice for his edit; HN only where it genuinely fits (posts 2–3 are HN-shaped; post 1 possibly "Show HN" with the demo); post URL added to active applications.
+- **Per-post distribution checklist:** LinkedIn post drafted in Ryan's voice for his edit; HN optional and entirely Ryan's call per post (posts 2–3 are HN-shaped; post 1 possibly "Show HN" with the demo); optional Medium syndication via Medium's import tool so the canonical URL stays on ilano.fyi; post URL added to active applications. ilano.fyi is always the canonical home.
 - **Drafting model:** Claude drafts from sources with a source map appendix; a **plain-writing pass** on the prose (the `plain-writing` skill — simple words, no filler, no AI-isms, with an HTML diff of edits Ryan can review); Ryan does the voice/color pass; claim verification; publish (`draft: false`, featured flags as decided).
 
 ## Quality gates (source accuracy)
