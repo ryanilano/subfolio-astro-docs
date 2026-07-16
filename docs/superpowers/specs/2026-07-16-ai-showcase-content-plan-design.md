@@ -44,6 +44,8 @@ Uses the theme's structured schema: problem → constraints → approach → key
 
 **B. Writing post** (`writing` collection): the narrative version — what Subfolio was (Area17 pedigree), why it deserved resurrection, and what driving Claude through a legacy port is actually like when you have the domain knowledge to steer. The shareable artifact; the case study is the evidence artifact. Each links to the other.
 
+**Core angle for both artifacts (Ryan's emphasis):** structure the story around the changelog — what changed, and *why* each change was made. Two threads run through it: (1) where LLMs genuinely helped and how to drive them well, and (2) where Ryan's web-dev and performance domain knowledge produced improvements an LLM alone would likely never suggest. Each changelog-driven example is tagged to one of those threads. The takeaway a hiring manager should leave with: LLM leverage multiplied by domain judgment — not LLM output accepted as-is. Source the change list from the docs changelog (`changes.md`), the journey docs, and git history.
+
 **Sources for both:** this repo's journey docs (`why-the-port`, `architecture`, `security`, `performance`, `seo`, `free-deploy`, `deepseek-workflow`), git history, live demo.
 
 ### Week 2 — Post 2: Local AI on consumer hardware
