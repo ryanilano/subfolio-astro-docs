@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Subfolio-Astro Docs',
-      customCss: ['./src/styles/font.css'],
+      customCss: ['./src/styles/font.css', './src/styles/custom.css'],
       sidebar: [
         { label: 'Getting Started', slug: 'docs/getting-started' },
         {
