@@ -1,0 +1,40 @@
+/* Layout overrides for the lucode-starlight theme, ported from the cheapshot
+   docs site (all-caps.dev/cheapshot).
+
+   On a doc page the theme lays out a grid of [content 1fr | table of contents
+   240px] and centres a .main block of --content-max-width (40rem by default)
+   inside the content column. Widen it and pin it to the left, next to the
+   sidebar. */
+:root {
+  --content-max-width: 64rem;
+}
+
+.container-main > .main {
+  margin-inline: 0 auto;
+}
+
+/* The landing page has no .main, so the hero and the cards get their own cap
+   here and sit in a centred block instead of running edge to edge on a wide
+   monitor. Doc pages: no cap on the wrapper. */
+.container-main .markdown-wrapper {
+  max-width: none;
+}
+[data-has-hero] .markdown-wrapper,
+[data-has-hero] .hero {
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+}
+
+/* Starlight's CardGrid is two columns. A grid wrapped in .three-up shows three
+   portrait cards in a row once the screen is wide enough for them. */
+@media (min-width: 64rem) {
+  .three-up .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Keep the cards flush with the hero copy on narrow screens instead of
+   touching the viewport edges. */
+[data-has-hero] .markdown-wrapper {
+  padding-inline: 1rem;
+}
