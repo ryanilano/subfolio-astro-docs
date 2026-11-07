@@ -13,6 +13,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Subfolio-Astro Docs',
+      // Plausible analytics, self-hosted at stats.ilano.fyi. No cookies.
+      head: [
+        { tag: 'script', attrs: { defer: true, src: 'https://stats.ilano.fyi/js/pa-IHauegM8itI9LYFKSHtg_.js' } },
+        { tag: 'script', content: 'window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init();' },
+      ],
       customCss: ['./src/styles/font.css', './src/styles/custom.css'],
       sidebar: [
         { label: 'Getting Started', slug: 'docs/getting-started' },
