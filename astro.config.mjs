@@ -71,7 +71,7 @@ export default defineConfig({
           // repo's README §License — NOT lucode's default "Inspired by
           // shadcn/ui" credit (RESEARCH Pitfall 5).
           footerText:
-            '© 2026 Subfolio-Astro by Ryan Ilano. An Astro port of [Subfolio](https://github.com/area17/subfolio) by [AREA17](https://area17.com) [[AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html)] — [source](https://github.com/ryanilano/subfolio-astro).',
+            '© 2026 Subfolio-Astro by Ryan Ilano. An Astro port of [Subfolio](https://github.com/ryanilano/subfolio) by [AREA17](https://area17.com) [[AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html)] — [source](https://github.com/ryanilano/subfolio-astro).',
         }),
       ],
     }),
